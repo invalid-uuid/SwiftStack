@@ -363,11 +363,12 @@ open class APIClient: NSObject, URLSessionDataDelegate {
 					"HTTPEnable" : 1,
 					kCFNetworkProxiesHTTPProxy as AnyHashable : proxyAddress!,
 					kCFNetworkProxiesHTTPPort as AnyHashable : proxyPort,
-					
-					"HTTPSEnable" : 1,
-					kCFNetworkProxiesHTTPSProxy as AnyHashable : proxyAddress!,
-					kCFNetworkProxiesHTTPSPort as AnyHashable : proxyPort
 				]
+                #if os(macOS)
+                    configuration.connectionProxyDictionary!["HTTPSEnable"] = 1
+                    configuration.connectionProxyDictionary![kCFNetworkProxiesHTTPSProxy as AnyHashable] = proxyAddress!
+                    configuration.connectionProxyDictionary![kCFNetworkProxiesHTTPSPort as AnyHashable] = proxyPort
+                #endif
 			#endif
 		}
 		
