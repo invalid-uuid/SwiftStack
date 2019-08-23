@@ -135,7 +135,7 @@ public class User: JsonConvertible, CustomStringConvertible {
 		self.location = (dictionary["location"] as? String)?.stringByDecodingHTMLEntities
 		
 		if let urlString = dictionary["profile_image"] as? String {
-			self.link = URL(string: urlString)
+			self.profile_image = URL(string: urlString)
 		}
 		
 		self.question_count = dictionary["question_count"] as? Int
